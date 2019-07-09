@@ -1,0 +1,9 @@
+{
+    "mongoUrl": "mongodb://localhost:27017/tempo",
+    "agencies": [
+      {
+        "agency_key": "STAC",
+        "path": "./data/test.zip"
+      }
+    ]
+}
