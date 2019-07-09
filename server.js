@@ -8,6 +8,8 @@ const express = require('express'),
     config = require('./gtfs-config.json'),
     gtfs = require('gtfs');
 
+    const testRoute = require('./routes/test.route');
+    
     mongoose.Promise = global.Promise;
     mongoose.connect(config.mongoUrl, { useNewUrlParser: true }).then(
       () => {
@@ -29,6 +31,8 @@ const express = require('express'),
     const app = express();
     app.use(bodyParser.json());
     app.use(cors());
+    app.use('/test', testRoute);
+
     const port = process.env.PORT || 4000;
 
     const server = app.listen(port, function(){
