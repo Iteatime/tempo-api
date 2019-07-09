@@ -9,20 +9,22 @@ const express = require('express'),
     gtfs = require('gtfs');
 
     const testRoute = require('./routes/test.route');
+    const queryRoute = require('./routes/query.route');
+    const fileRoute = require('./routes/file.route');
     
     mongoose.Promise = global.Promise;
     mongoose.connect(config.mongoUrl, { useNewUrlParser: true }).then(
       () => {
         console.log('Database is connected')
         
-        gtfs.import(config)
-        .then(() => {
-            console.log('Import Successful');
-            // return mongoose.connection.close();
-        })
-        .catch(err => {
-            console.error(err);
-        });
+        // gtfs.import(config)
+        // .then(() => {
+        //     console.log('Import Successful');
+        //     // return mongoose.connection.close();
+        // })
+        // .catch(err => {
+        //     console.error(err);
+        // });
 
       },
       err => { console.log('Can not connect to the database'+ err)}
@@ -32,6 +34,8 @@ const express = require('express'),
     app.use(bodyParser.json());
     app.use(cors());
     app.use('/test', testRoute);
+    app.use('/query', queryRoute);
+    app.use('/file', fileRoute);
 
     const port = process.env.PORT || 4000;
 
