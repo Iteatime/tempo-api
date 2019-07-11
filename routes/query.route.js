@@ -18,13 +18,24 @@ routes.route('/').post(function (req, res) {
     });
 });
 
-routes.route('/timetables').get(async function (req, res) {
+routes.route('/timetables').post(async function (req, res) {
+    const payload = req.body;
+    
     const agency_key = 'STAC';
-    const routes = await gtfs.getRoutes();
+    let routes = await gtfs.getRoutes();
     const data = {};
 
+    if (payload.hasOwnProperty('routes')) {
+        const filteredRoutes = [];
+        for (let route of routes) {
+            if (payload.routes.includes(route.route_id)) {
+                filteredRoutes.push(route);
+            }
+        }
+        routes = filteredRoutes;
+    }
+
     for (let route of routes) {
-        const route = routes[1];
         let route_id = route.route_id;
         data[route_id] = [];
 
