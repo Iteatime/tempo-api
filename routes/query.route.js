@@ -24,6 +24,7 @@ routes.route('/timetables').get(async function (req, res) {
     const data = {};
 
     for (let route of routes) {
+        const route = routes[1];
         let route_id = route.route_id;
         data[route_id] = [];
 
@@ -49,7 +50,17 @@ routes.route('/timetables').get(async function (req, res) {
                     stop_id,
                 });
 
-                data[route_id][direction_id].times[stop_id] = times;
+                let obj = {};
+                for (let time of times) {
+                    let match = time.trip_id.match(/^(\d+)-(\w+)-(\w+)-(.+)$/);
+                    let id = match[4];
+                    if (!obj.hasOwnProperty(id)) {
+                        obj[id] = []
+                    }
+                    obj[id].push(time);
+                }
+
+                data[route_id][direction_id].times[stop_id] = obj;
             }
         }
     }
