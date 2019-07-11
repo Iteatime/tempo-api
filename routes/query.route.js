@@ -18,33 +18,43 @@ routes.route('/').post(function (req, res) {
     });
 });
 
-routes.route('/timetables').get(function (req, res) {
+routes.route('/timetables').get(async function (req, res) {
+    const agency_key = 'STAC';
+    const routes = await gtfs.getRoutes();
     const data = {};
-    gtfs.getRoutes()
-    .then(routes => {
-        const maxThreads = routes.length * 2;
-        let doneThreads = 0;
-        for (let route of routes) {
-            data[route.route_id] = [ [], [] ];
-            for (let direction of [0, 1]) {
-                gtfs.getStops({agency_key: 'STAC', route_id: route.route_id, direction_id: direction})
-                .then(stops => {
-                    const stop_indices = stops.map(stop => {return stop.stop_id});
-                    data[route.route_id][direction] = stop_indices;
-                    doneThreads++;
-                    if (doneThreads === maxThreads) {
-                        res.json(data);
-                    }
-                })
-                .catch(err => {
-                    console.log(err);
-                })
+
+    for (let route of routes) {
+        let route_id = route.route_id;
+        data[route_id] = [];
+
+        for (let direction_id of [0, 1]) {
+            let stops = await gtfs.getStops({
+                agency_key,
+                route_id,
+                direction_id,
+            });
+
+            const stop_indices = stops.map(stop => {return stop.stop_id});
+
+            data[route_id][direction_id] = {
+                stops: stop_indices,
+                times: {},
+            }
+
+            for (let stop_id of stop_indices) {
+                let times = await gtfs.getStoptimes({
+                    agency_key,
+                    route_id,
+                    direction_id,
+                    stop_id,
+                });
+
+                data[route_id][direction_id].times[stop_id] = times;
             }
         }
-    })
-    .catch(err => {
-        console.log(err);
-    });
+    }
+
+    res.json(data);
 });
 
 module.exports = routes;
