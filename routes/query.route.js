@@ -49,6 +49,7 @@ routes.route('/timetables').post(async function (req, res) {
             const stop_indices = stops.map(stop => {return stop.stop_id});
 
             data[route_id][direction_id] = {
+                name: stops[stops.length - 1].stop_name,
                 stops: stop_indices,
                 times: {},
             }
@@ -63,7 +64,7 @@ routes.route('/timetables').post(async function (req, res) {
 
                 let obj = {};
                 for (let time of times) {
-                    let match = time.trip_id.match(/^(\d+)-(\w+)-(\w+)-(.+)$/);
+                    let match = time.trip_id.match(/^(\d+)-(\w+)-(\w+)-(\w+)-.+$/);
                     let id = match[4];
                     if (!obj.hasOwnProperty(id)) {
                         obj[id] = []
