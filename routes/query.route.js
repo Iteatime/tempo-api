@@ -20,7 +20,7 @@ routes.route('/').post(function (req, res) {
 
 routes.route('/timetables').post(async function (req, res) {
     const payload = req.body;
-    
+
     const agency_key = 'STAC';
     let routes = await gtfs.getRoutes();
     const data = {};
@@ -49,9 +49,12 @@ routes.route('/timetables').post(async function (req, res) {
             const stop_indices = stops.map(stop => {return stop.stop_id});
 
             data[route_id][direction_id] = {
-                name: stops[stops.length - 1].stop_name,
+                name: '',
                 stops: stop_indices,
                 times: {},
+            }
+            if (stops.length > 0 ) {
+              data[route_id][direction_id].name = stops[stops.length - 1].stop_name;
             }
 
             for (let stop_id of stop_indices) {
