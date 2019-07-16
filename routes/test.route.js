@@ -7,13 +7,7 @@ const gtfs = require('gtfs');
 
 // Defined store route
 routes.route('/').get(function (req, res) {
-    gtfs.getRoutes()
-    .then(routes => {
-        res.json(routes);
-    })
-    .catch(err => {
-        console.log(err);
-    });
+    res.json({});
 });
 
 module.exports = routes;
