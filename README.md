@@ -23,4 +23,4 @@ This app is an API to treat gtfs datas using mongodb.
 
 ### 2 Libraries
 
-* We are currently using node-gtfs to treat gts data, you can find informations about node-gtfs [here](https://www.npmjs.com/package/gtfs).
+* We are currently using node-gtfs to treat gtfs data, you can find informations about node-gtfs [here](https://www.npmjs.com/package/gtfs).
