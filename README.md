@@ -6,8 +6,8 @@ This application is based on [node-gtfs](https://www.npmjs.com/package/gtfs) and
 
 ### 1 Requirements:
 
-Download [Node.js version 10.x: latest](https://nodejs.org/en/download/)   
-Download [MongoDB installer](https://www.mongodb.com/download-center/community?jmp=docs) (version 4 or later) as MSI  file, then follow the instructions provided in [this page](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/#download-mdb-edition) to install MongoDB as a Windows service.
+- Download [Node.js version 10.x: latest](https://nodejs.org/en/download/)   
+- Download [MongoDB installer](https://www.mongodb.com/download-center/community?jmp=docs) (version 4 or later) as MSI  file, then follow the instructions provided in [this page](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/#download-mdb-edition) to install MongoDB as a Windows service.
  
 ### Step 2: Download this repository
 
