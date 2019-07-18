@@ -1,20 +1,24 @@
-# Tempo API
+# Tempo
 
 This application is based on [node-gtfs](https://www.npmjs.com/package/gtfs) and is designed to work as an API for [Synchrobus Tempo](https://github.com/Iteatime/tempo-react).
 
-## How to install *(Microsoft Windows only)*
+## How To start:
 
-### Step 1: Install Node.js
+### 1 Requirements:
 
-Download [Node.js installer](https://nodejs.org/en/) (version 10 or later), then follow the instructions.
-
-### Step 2: Install MongoDB
-
-Download [MongoDB installer](https://www.mongodb.com/download-center/community?jmp=docs) (version 4 or later) as MSI file, then follow the instructions provided in [this page](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/#download-mdb-edition) to install MongoDB as a Windows service.
-
-### Step 3: Download this repository
+    [Node.js version 10.x: latest](https://nodejs.org/en/download/) 
+    Download [MongoDB installer](https://www.mongodb.com/download-center/community?jmp=docs) (version 4 or later) as MSI  file, then follow the instructions provided in [this page](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/#download-mdb-edition) to install MongoDB as a Windows service.
+ 
+### Step 2: Download this repository
 
 Click the *clone or download* button to download this repository as a ZIP filem then extract it in your desired directory using a ZIP file extractor like [7Zip](https://www.7-zip.org/).
+
+### 3 Installation:
+
+Here you have to:
+- Move in the directory of the project using `cd` command
+example:`cd Bureau/tempo-api`
+- Use `npm install` command
 
 ### Step 4: Run bundled command file
 
@@ -34,6 +38,19 @@ At this point, the console should read:
 [nodemon] starting `node server.js`
 Listening on port 4000
 Database is connected
+```
+If you can read this, then everything is working fine.
+
+You can now connect to Synchrobus Tempo and upload your GTFS file.
+
+### 5 Unit tests:
+
+
+
+### 6 Continous deployment:
+
+The code pushed on this repo is continously deployed to [Netlify](https://www.netlify.com/).
+
 ```
 If you can read this, then everything is working fine.
 
