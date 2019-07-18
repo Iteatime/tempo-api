@@ -16,17 +16,19 @@ This app is an API to treat gtfs datas using mongodb.
 #### 1.2 Installation:
 
 * Install node gtfs and mongoose with `npm install gtfs mongoose -g`
+* download the zip file of the project on this page and extract the file
 * You have to clone this repo then you can run: `npm install` after `cd path/of/the/project`
 
-example if the directory is on your desk:
+example if you excracted the zip file on your desk:
 > npm install gtfs mongoose -g  
-> cd Bureau/tempo-api/tempo-api/  
+> cd Bureau/tempo-api-master/  
 > npm install
 
 
 #### 1.3 Run server:
 
 * You can start without the watch via: `nodemon server` in the file directory
+* You can stop the server with `ctrl + v`
 
 ### 2 Libraries
 
