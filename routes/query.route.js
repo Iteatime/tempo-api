@@ -68,6 +68,7 @@ routes.route('/timetables').post(async function (req, res) {
                 let obj = {};
                 for (let time of times) {
                     let match = time.trip_id.match(/^(\d+)-(\w+)-(\w+)-(\w+)-.+$/);
+                    let period = match[2];
                     let id = match[4];
                     if (!obj.hasOwnProperty(id)) {
                         obj[id] = []

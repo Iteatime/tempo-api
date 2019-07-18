@@ -30,12 +30,13 @@ routes.route('/').post(function (req, res) {
             }
         )
         .then(() => {
-            console.log('Import Successful');
+            res.json({});
+            console.log('** Import Successful **');
             // return mongoose.connection.close();
         })
         .catch(err => {
             console.error(err);
-        });    
+        });
     });
 
     return;

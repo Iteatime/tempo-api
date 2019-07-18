@@ -17,14 +17,14 @@ const express = require('express'),
       () => {
         console.log('Database is connected')
 
-        gtfs.import(config)
-        .then(() => {
-            console.log('Import Successful');
-            // return mongoose.connection.close();
-        })
-        .catch(err => {
-            console.error(err);
-        });
+        // gtfs.import(config)
+        // .then(() => {
+        //     console.log(' ** Import Successful **');
+        //     // return mongoose.connection.close();
+        // })
+        // .catch(err => {
+        //     console.error(err);
+        // });
 
       },
       err => { console.log('Can not connect to the database'+ err)}
