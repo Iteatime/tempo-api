@@ -19,8 +19,8 @@ This app is an API to treat gtfs datas using mongodb.
 * You have to clone this repo then you can run: `npm install` after `cd path/of/the/project`
 
 example:
-> npm install gtfs mongoose -g
-> cd Bureau/tempo-api/tempo-api/
+> npm install gtfs mongoose -g  
+> cd Bureau/tempo-api/tempo-api/  
 > npm install
 
 
