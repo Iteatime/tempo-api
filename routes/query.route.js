@@ -9,7 +9,7 @@ const gtfs = require('gtfs');
 // Defined store route
 routes.route('/').post(function (req, res) {
     data = req.body;
-    gtfs[data.method](data.params);
+    gtfs[data.method](data.params)
     .then(routes => {
         res.json(routes);
     })
