@@ -11,6 +11,7 @@ const express = require('express'),
     const testRoute = require('./routes/test.route');
     const queryRoute = require('./routes/query.route');
     const fileRoute = require('./routes/file.route');
+    const mainRoute = require('./routes/main.route');
 
     mongoose.Promise = global.Promise;
     mongoose.connect(config.mongoUrl, { useNewUrlParser: true }).then(
@@ -36,6 +37,7 @@ const express = require('express'),
     app.use('/test', testRoute);
     app.use('/query', queryRoute);
     app.use('/file', fileRoute);
+    app.use('/', mainRoute);
 
     const port = process.env.PORT || 4000;
 

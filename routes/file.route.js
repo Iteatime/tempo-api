@@ -67,10 +67,13 @@ routes.route('/').post(function (req, res) {
                 // mongoose.connection.close();
             });
 
-            res.json({});
+            res.status(204);
+            res.send();
             console.log('Import successful');
         })
         .catch(err => {
+            res.status(500);
+            res.send();
             console.error(err);
         });
     });
