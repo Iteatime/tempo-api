@@ -1,4 +1,4 @@
-# Tempo API
+# Tempo
 
 This application is based on [node-gtfs](https://www.npmjs.com/package/gtfs) and is designed to work as an API for [Synchrobus Tempo](https://github.com/Iteatime/tempo-react).
 
@@ -6,8 +6,8 @@ This application is based on [node-gtfs](https://www.npmjs.com/package/gtfs) and
 
 ### Step 1: Install Node.js
 
-Download [Node.js installer](https://nodejs.org/en/) (version 10 or later), then follow the instructions.
-
+Download and install [Node.js version 10.x: latest](https://nodejs.org/en/download/).
+ 
 ### Step 2: Install MongoDB
 
 Follow the instructions provided in [this page](https://docs.mongodb.com/manual/administration/install-community/) to install MongoDB according to your OS.
