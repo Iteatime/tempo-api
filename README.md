@@ -18,7 +18,7 @@ Click the *clone or download* button to download this repository as a ZIP file t
 
 ### Step 4: Install dependencies
 
-Navigate to the repository folder, then run the following command from your terminal to install the application's required dependencies.
+Navigate to the repository folder (i.e. if you extracted the repository in ~/Desktop, enter `cd ~/Desktop/tempo-api`), then run the following command from your terminal to install the application's required dependencies.
 
 `npm install`
 
