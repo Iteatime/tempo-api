@@ -1,40 +1,33 @@
-# Tempo
+# Tempo API
 
 This application is based on [node-gtfs](https://www.npmjs.com/package/gtfs) and is designed to work as an API for [Synchrobus Tempo](https://github.com/Iteatime/tempo-react).
 
-## How to install
+## Requirements
 
-### Step 1: Install Node.js
+- Node.js version 10.x: latest. You can download it [here](https://nodejs.org/en/download/)
+- MongoDB. Installation instructions [here](https://docs.mongodb.com/manual/administration/install-community/)
+- nodemon `npm install -g nodemon`
 
-Download and install [Node.js version 10.x: latest](https://nodejs.org/en/download/).
- 
-### Step 2: Install MongoDB
+## Installation
 
-Follow the instructions provided in [this page](https://docs.mongodb.com/manual/administration/install-community/) to install MongoDB according to your OS.
+```
+git clone https://github.com/Iteatime/tempo-api.git
+cd tempo-api
+npm install
+```
 
-### Step 3: Download this repository
+## Running
 
-Click the *clone or download* button to download this repository as a ZIP file then extract it in your desired directory using a ZIP file extractor like [7Zip](https://www.7-zip.org/).
+Start MongoDB
 
-### Step 4: Install dependencies
+`mongod`
 
-Navigate to the repository folder (i.e. if you extracted the repository in ~/Desktop, enter `cd ~/Desktop/tempo-api`), then run the following command from your terminal to install the application's required dependencies.
-
-`npm install`
-
-### Step 5: Connect MongoDB
-
-From the same terminal instance, run the following command to launch the MongoDB client.
-
-`mongo`
-
-### Step 6: Run the application
-
-From the same terminal instance, run the following command to actually start the applicaiton.
+Run the app (in another terminal):
 
 `nodemon server`
 
 At this point, the console should read:
+
 ```
 [nodemon] 1.19.1
 [nodemon] to restart at any time, enter `rs`
@@ -43,6 +36,7 @@ At this point, the console should read:
 Listening on port 4000
 Database is connected
 ```
+
 If you can read this, then everything is working fine.
 
 In order to test the application, you can navigate to [http://localhost:4000/](http://localhost:4000/), which should return the following message: `Tempo API is up and running!`.
