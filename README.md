@@ -22,7 +22,13 @@ npm install
 
 Start MongoDB
 
-`mongod`
+On linux:
+`sudo service mongod start`
+
+Stop MongoDB
+
+On linux:
+`sudo service mongod stop`
 
 Run the app (in another terminal):
 
