@@ -24,14 +24,18 @@ npm install
 
 Start MongoDB
 
-On linux:
+On Linux:
 `sudo service mongod start`
+
 [On windows](https://stackoverflow.com/questions/20796714/how-do-i-start-mongo-db-from-windows)  
 
 Stop MongoDB
 
-On linux:
+On Linux:
 `sudo service mongod stop`
+
+On Windows:
+`Ctrl + C`
 
 Run the app (in another terminal):
 
