@@ -10,9 +10,11 @@ This application is based on [node-gtfs](https://www.npmjs.com/package/gtfs) and
 
 ## Installation
 
+You have to clone the project in the wanted directory and then move in this directory with `cd` command and then run `npm install`:
+
 ```
 git clone https://github.com/Iteatime/tempo-api.git
-cd tempo-api
+cd <project directory>
 npm install
 ```
 
