@@ -6,6 +6,7 @@ This application is based on [node-gtfs](https://www.npmjs.com/package/gtfs) and
 
 - Node.js version 10.x: latest. You can download it [here](https://nodejs.org/en/download/)
 - MongoDB. Installation instructions [here](https://docs.mongodb.com/manual/administration/install-community/)
+- On windows: restart your computer
 - nodemon `npm install -g nodemon`
 
 ## Installation
@@ -24,6 +25,7 @@ Start MongoDB
 
 On linux:
 `sudo service mongod start`
+[On windows](https://stackoverflow.com/questions/20796714/how-do-i-start-mongo-db-from-windows)
 
 Stop MongoDB
 
