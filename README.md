@@ -37,7 +37,7 @@ On Linux:
 On Windows:
 `Ctrl + C`
 
-Run the app (in another terminal):
+Run the app (in terminal you did `npm install`):
 
 `nodemon server`
 
