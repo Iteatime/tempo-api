@@ -3,7 +3,7 @@
     "agencies": [
       {
         "agency_key": "STAC",
-        "path": "./data/test.zip"
+        "path": "./data/GTFS SEPT 2019 v23072019,zip"
       }
     ]
 }
