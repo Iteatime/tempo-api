@@ -51,14 +51,23 @@ routes.route('/timetables').post(async function (req, res) {
             let indexedTrips = {};
             for (let trip of trips) {
                 let match = trip.trip_id.match(/^(\d+)-(\w+)-(\w+)-(\w+)-\d\d-?(\w*)$/);
-                indexedTrips[match[1]] = match.slice(2, 6);
+                let id = match[1];
+                let prod = match[3];
+                if (!indexedTrips.hasOwnProperty(prod)) {
+                    indexedTrips[prod] = {};
+                }
+                indexedTrips[prod][id] = match.slice(2, 6);
             }
 
+            console.log(indexedTrips);
+
             let special = [];
-            for (let tripData of Object.values(indexedTrips)) {
-                if (tripData[3].length > 0) {
-                    if (!special.includes(tripData[3])) {
-                        special.push(tripData[3])
+            for (let prodData of Object.values(indexedTrips)) {
+                for (let tripData of Object.values(prodData)) {
+                    if (tripData[3].length > 0) {
+                        if (!special.includes(tripData[3])) {
+                            special.push(tripData[3])
+                        }
                     }
                 }
             }
@@ -86,8 +95,8 @@ routes.route('/timetables').post(async function (req, res) {
 
                 let obj = {};
                 for (let time of times) {
-                    let match = time.trip_id.match(/^(\d+)-/);
-                    let id = indexedTrips[match[1]].slice(1,3).join('-')
+                    let match = time.trip_id.match(/^(\d+)-\w+-(\w+)/);
+                    let id = indexedTrips[match[2]][match[1]].slice(1,3).join('-')
                     if (!obj.hasOwnProperty(id)) {
                         obj[id] = []
                     }
