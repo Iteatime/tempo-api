@@ -59,8 +59,6 @@ routes.route('/timetables').post(async function (req, res) {
                 indexedTrips[prod][id] = match.slice(2, 6);
             }
 
-            console.log(indexedTrips);
-
             let special = [];
             for (let prodData of Object.values(indexedTrips)) {
                 for (let tripData of Object.values(prodData)) {
