@@ -6,6 +6,7 @@ This application is based on [node-gtfs](https://www.npmjs.com/package/gtfs) and
 
 - Node.js version 10.x: latest. You can download it [here](https://nodejs.org/en/download/)
 - MongoDB. Installation instructions [here](https://docs.mongodb.com/manual/administration/install-community/)
+- On Linux: install [Git](https://git-scm.com/book/fr/v1/D%C3%A9marrage-rapide-Installation-de-Git)
 - On windows: install [Git](https://git-scm.com/download/win)
 - On windows: restart your computer
 - nodemon `npm install -g nodemon`
