@@ -19,6 +19,7 @@ routes.route('/').post(function (req, res) {
 });
 
 routes.route('/timetables').post(async function (req, res) {
+// routes.route('/timetables').get(async function (req, res) {
     const payload = req.body;
     
     const agency_key = 'STAC';
@@ -57,7 +58,9 @@ routes.route('/timetables').post(async function (req, res) {
                 if (!indexedTrips.hasOwnProperty(prod)) {
                     indexedTrips[prod] = {};
                 }
-                indexedTrips[prod][id] = match.slice(2, 6);
+                let data = match.slice(2, 6);
+                data.push(trip.shape_id);
+                indexedTrips[prod][id] = data;
 
                 headsignsByTrip[trip.trip_id] = trip.trip_headsign;
             }
@@ -65,10 +68,19 @@ routes.route('/timetables').post(async function (req, res) {
             let special = [];
             for (let prodData of Object.values(indexedTrips)) {
                 for (let tripData of Object.values(prodData)) {
+                    let code = [tripData[tripData.length - 1]];
+
                     if (tripData[3].length > 0) {
-                        if (!special.includes(tripData[3])) {
-                            special.push(tripData[3])
-                        }
+                        code.push(tripData[3]);
+                        // if (!special.includes(tripData[3])) {
+                        //     special.push(tripData[3])
+                        // }
+                    }
+
+                    code = code.join('-');
+
+                    if (!special.includes(code)) {
+                        special.push(code);
                     }
                 }
             }
@@ -93,7 +105,7 @@ routes.route('/timetables').post(async function (req, res) {
                 let obj = {};
                 for (let time of stopTimes) {
                     let match = time.trip_id.match(/^(\d+)-\w+-(\w+)/);
-                    let id = indexedTrips[match[2]][match[1]].slice(1,3).join('-')
+                    let id = indexedTrips[match[2]][match[1]].slice(1,3).join('-');
                     if (!obj.hasOwnProperty(id)) {
                         obj[id] = []
                     }
