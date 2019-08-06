@@ -46,7 +46,7 @@ routes.route('/').post(function (req, res) {
                 ]
             }
         )
-        .then(() => {
+        .then(async () => {
             // mongoose.connect('mongodb://localhost:27017/tempo', function(err) {
             //     if (err) { throw err; }
             // });
@@ -55,13 +55,13 @@ routes.route('/').post(function (req, res) {
             name = match[1];
 
             const deleteQuery = FileModel.deleteMany();
-            deleteQuery.exec(function (err) {
+            await deleteQuery.exec(function (err) {
                 if (err) { throw err; }
             });
 
             var currentFile = new FileModel({ name });
 
-            currentFile.save(function (err) {
+            await currentFile.save(function (err) {
                 if (err) { throw err; }
                 console.log('Registered file name succesfully');
                 // mongoose.connection.close();
