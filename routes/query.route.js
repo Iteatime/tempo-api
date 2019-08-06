@@ -48,6 +48,7 @@ routes.route('/timetables').post(async function (req, res) {
 
             let trips = await gtfs.getTrips(params);
 
+            let headsignsByTrip = {};
             let indexedTrips = {};
             for (let trip of trips) {
                 let match = trip.trip_id.match(/^(\d+)-(\w+)-(\w+)-(\w+)-\d\d-?(\w*)$/);
@@ -57,6 +58,8 @@ routes.route('/timetables').post(async function (req, res) {
                     indexedTrips[prod] = {};
                 }
                 indexedTrips[prod][id] = match.slice(2, 6);
+
+                headsignsByTrip[trip.trip_id] = trip.trip_headsign;
             }
 
             let special = [];
@@ -74,34 +77,51 @@ routes.route('/timetables').post(async function (req, res) {
 
             const stop_indices = stops.map(stop => {return stop.stop_id});
 
-            let name = stops.length > 0 ? stops[stops.length - 1].stop_name : '' ;
-
-            data[route_id][direction_id] = {
-                name,
-                special,
-                stops: stop_indices,
-                times: {},
-            }
+            let times = {};
+            let headsigns = {};
+            let name = [];
 
             for (let stop_id of stop_indices) {
-                let times = await gtfs.getStoptimes({
+                let stopTimes = await gtfs.getStoptimes({
                     agency_key,
                     route_id,
                     direction_id,
                     stop_id,
                 });
 
+                let stopHeadsign = [];
                 let obj = {};
-                for (let time of times) {
+                for (let time of stopTimes) {
                     let match = time.trip_id.match(/^(\d+)-\w+-(\w+)/);
                     let id = indexedTrips[match[2]][match[1]].slice(1,3).join('-')
                     if (!obj.hasOwnProperty(id)) {
                         obj[id] = []
                     }
                     obj[id].push(time);
+
+                    let headsign = headsignsByTrip[time.trip_id];
+                    match = headsign.match(/^\w+\s+(.+)$/);
+                    if (match) {
+                        headsign = match[1];
+                    }
+                    if (!stopHeadsign.includes(headsign)) {
+                        stopHeadsign.push(headsign);
+                    }
+                    if (!name.includes(headsign)) {
+                        name.push(headsign);
+                    }
                 }
 
-                data[route_id][direction_id].times[stop_id] = obj;
+                times[stop_id] = obj;
+                headsigns[stop_id] = stopHeadsign;
+            }
+
+            data[route_id][direction_id] = {
+                name,
+                special,
+                stops: stop_indices,
+                times,
+                headsigns,
             }
         }
     }
