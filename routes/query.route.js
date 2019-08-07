@@ -81,7 +81,7 @@ routes.route('/timetables').post(async function (req, res) {
 
                     if (!special.includes(code)) {
                         special.push(code);
-                    }
+                   }
                 }
             }
 
