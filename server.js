@@ -11,6 +11,7 @@ const express = require('express'),
     const testRoute = require('./routes/test.route');
     const queryRoute = require('./routes/query.route');
     const fileRoute = require('./routes/file.route');
+    const configRoute = require('./routes/config.route');
     const mainRoute = require('./routes/main.route');
 
     mongoose.Promise = global.Promise;
@@ -37,10 +38,11 @@ const express = require('express'),
     app.use('/test', testRoute);
     app.use('/query', queryRoute);
     app.use('/file', fileRoute);
+    app.use('/config', configRoute);
     app.use('/', mainRoute);
 
     const port = process.env.PORT || 4000;
 
     const server = app.listen(port, function(){
-     console.log('Listening on port ' + port);
+      console.log('Listening on port ' + port);
     });
