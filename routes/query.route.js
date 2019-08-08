@@ -14,12 +14,11 @@ routes.route('/').post(function (req, res) {
         res.json(routes);
     })
     .catch(err => {
-        console.log(err);
+        console.error(err);
     });
 });
 
 routes.route('/timetables').post(async function (req, res) {
-// routes.route('/timetables').get(async function (req, res) {
     const payload = req.body;
     
     const agency_key = 'STAC';
@@ -72,9 +71,6 @@ routes.route('/timetables').post(async function (req, res) {
 
                     if (tripData[3].length > 0) {
                         code.push(tripData[3]);
-                        // if (!special.includes(tripData[3])) {
-                        //     special.push(tripData[3])
-                        // }
                     }
 
                     code = code.join('-');
@@ -130,10 +126,10 @@ routes.route('/timetables').post(async function (req, res) {
 
             data[route_id][direction_id] = {
                 name,
+                headsigns,
                 special,
                 stops: stop_indices,
                 times,
-                headsigns,
             }
         }
     }
