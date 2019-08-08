@@ -4,41 +4,22 @@ This application is based on [node-gtfs](https://www.npmjs.com/package/gtfs) and
 
 ## Requirements
 
-- Node.js version 10.x: latest. You can download it [here](https://nodejs.org/en/download/)
-- MongoDB. Installation instructions [here](https://docs.mongodb.com/manual/administration/install-community/)
-- On Linux: install [Git](https://git-scm.com/book/fr/v1/D%C3%A9marrage-rapide-Installation-de-Git)
-- On windows: install [Git](https://git-scm.com/download/win)
-- On windows: restart your computer
-- nodemon `npm install -g nodemon`
+- **Node.js version 10 or later.** You can download it [here](https://nodejs.org/en/download/)
+- **MongoDB.** Installation instructions [here](https://docs.mongodb.com/manual/administration/install-community/)
 
 ## Installation
 
-You have to clone the project in the wanted directory and then move in this directory with `cd` command and then run `npm install`:
+[Clone this repository](https://help.github.com/en/articles/cloning-a-repository) or download it.
 
-```
-git clone https://github.com/Iteatime/tempo-api.git
-cd <project directory>
-npm install
-```
+Invoke a command line tool at the installation directory and install the application's dependencies using:
+
+`npm install`
 
 ## Running
 
-Start MongoDB
+Make sure that the MongoDB service is running (refer back to the [installation instructions](https://docs.mongodb.com/manual/administration/install-community/) if it's not).
 
-On Linux:
-`sudo service mongod start`
-
-[On windows](https://stackoverflow.com/questions/20796714/how-do-i-start-mongo-db-from-windows)  
-
-Stop MongoDB
-
-On Linux:
-`sudo service mongod stop`
-
-On Windows:
-`Ctrl + C`
-
-Run the app (in terminal you did `npm install`):
+Run the application using:
 
 `nodemon server`
 
@@ -55,7 +36,7 @@ Database is connected
 
 If you can read this, then everything is working fine.
 
-In order to test the application, you can navigate to [http://localhost:4000/](http://localhost:4000/), which should return the following message: `Tempo API is up and running!`.
+In order to ensure the application is actually working, you can navigate to [http://localhost:4000/](http://localhost:4000/), which should return the following message: `Tempo API is up and running!`.
 
 You can now connect to Synchrobus Tempo and upload your GTFS file.
 
@@ -80,6 +61,28 @@ Read more on the GTFS standard format [here](https://developers.google.com/trans
 
 Returns a **204** response if the file was imported succesfully, a **500** error otherwise.
 
+### GET `/config`
+
+Returns Tempo configuration data that was previously saved.
+
+Format specification:
+
+> For each **route id**
+>> For each **direction id** (0 or 1)
+>>> - **anotations**: For each **special** code *(of route in direction)*
+>>>> - **symbol**: The name of the symbol to display alongside stop times relevant to the annotation
+>>>> - **text**: The caption to display at the bottom of the time sheet
+>>> - **frequencies**: An array of objects featuring the properties of each frequency display range:
+>>>> - **start**: The start time of the period
+>>>> - **end**: The end time of the period
+>>>> - **timing**: How often a bus shows up during the given period
+
+### POST `/config`
+
+Retrieves Tempo's current configuration and stores it in the database.
+
+Returns a **204** response if the configuration was written succesfully, a **500** error otherwise.
+
 ### POST `/query`
 
 Send a query to the **node-gtfs** client. Read more on how to query node-gtfs [here](https://github.com/BlinkTagInc/node-gtfs#gtfsgetagenciesquery-projection-options).
@@ -99,7 +102,12 @@ Format specification:
 
 > For each **route id**
 >> For each **direction id** (0 or 1)
->>> For each **stop id** *(of route in direction)*
+>>> - **headsigns**: For each **stop id** *(of route in direction)*
+>>>> An array of last stop names (useful for branched routes) 
+>>> - **name**: A human-readable direction name for UI display
+>>> - **special**: A list of all special codes found in trips on this route/direction
+>>> - **stops**: A list of all stop names along this route/direction
+>>> - **times**: For each **stop id** *(of route in direction)*
 >>>> For each **period id** *(found in all **stop times** related to stop in route and direction)*
 >>>>> An array of **stop times** *(from period at stop in route and direction)*
 
@@ -109,56 +117,68 @@ Example ouput *(where each `{...}` is a **stop time** object)*:
 [
     "Route-1": [
         0: {
-            "Stop A": {
-                "Week": [
-                    {...},
-                    {...},
-                    {...},
-                ],
-                "Weekend": [
-                    {...},
-                    {...},
-                    {...},
-                ],
-            },
-            "Stop B": {
-                "Week": [
-                    {...},
-                    {...},
-                    {...},
-                ],
-                "Weekend": [
-                    {...},
-                    {...},
-                    {...},
-                ],
+            headsigns: ["Stop B"],
+            name: "Stop B",
+            special: ["1-0010000"],
+            stops: ["Stop A", "Stop B"],
+            times: {
+                "Stop A": {
+                    "Week": [
+                        {...},
+                        {...},
+                        {...},
+                    ],
+                    "Weekend": [
+                        {...},
+                        {...},
+                        {...},
+                    ],
+                },
+                "Stop B": {
+                    "Week": [
+                        {...},
+                        {...},
+                        {...},
+                    ],
+                    "Weekend": [
+                        {...},
+                        {...},
+                        {...},
+                    ],
+                },
             },
         },
 
         1: {
-            "Stop B": {
-                "Week": [
-                    {...},
-                    {...},
-                    {...},
-                ],
-                "Weekend": [
-                    {...},
-                    {...},
-                    {...},
-                ],
-            },
-            "Stop A": {
-                "Week": [
-                    {...},
-                    {...},
-                    {...},
-                ],
-                "Weekend": [
-                    {...},
-                    {...},
-                    {...},
-                ],
+            headsigns: ["Stop A"],
+            name: "Stop A",
+            special: ["1-0010000"],
+            stops: ["Stop B", "Stop A"],
+            times: {
+                "Stop A": {
+                    "Week": [
+                        {...},
+                        {...},
+                        {...},
+                    ],
+                    "Weekend": [
+                        {...},
+                        {...},
+                        {...},
+                    ],
+                },
+                "Stop B": {
+                    "Week": [
+                        {...},
+                        {...},
+                        {...},
+                    ],
+                    "Weekend": [
+                        {...},
+                        {...},
+                        {...},
+                    ],
+                },
             },
         },
     ],

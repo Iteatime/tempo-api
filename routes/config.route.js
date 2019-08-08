@@ -33,12 +33,10 @@ routes.route('/').post(async function (req, res) {
 
     await currentConfig.save(function (err) {
         if (err) { throw err; }
-        console.log('Registered config succesfully');
     });
 
     res.status(204);
     res.send();
-    console.log('Config save successful');
 });
 
 module.exports = routes;
