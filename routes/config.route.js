@@ -38,7 +38,18 @@ routes.route('/').post(async function (req, res) {
 
     res.status(204);
     res.send();
-    console.log('Config save successful');
+    console.log('Config saved successfully');
+});
+
+routes.route('/').delete(async function (req, res) {
+    const deleteQuery = ConfigModel.deleteMany();
+    await deleteQuery.exec(function (err) {
+        if (err) { throw err; }
+    });
+
+    res.status(204);
+    res.send();
+    console.log('Config deleted successfully');
 });
 
 module.exports = routes;
