@@ -63,13 +63,11 @@ routes.route('/').post(function (req, res) {
 
             await currentFile.save(function (err) {
                 if (err) { throw err; }
-                console.log('Registered file name succesfully');
                 // mongoose.connection.close();
             });
 
             res.status(204);
             res.send();
-            console.log('Import successful');
         })
         .catch(err => {
             res.status(500);
