@@ -39,4 +39,14 @@ routes.route('/').post(async function (req, res) {
     res.send();
 });
 
+routes.route('/').delete(async function (req, res) {
+    const deleteQuery = ConfigModel.deleteMany();
+    await deleteQuery.exec(function (err) {
+        if (err) { throw err; }
+    });
+
+    res.status(204);
+    res.send();
+});
+
 module.exports = routes;
