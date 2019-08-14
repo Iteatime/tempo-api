@@ -26,7 +26,6 @@ routes.route('/').get(function (req, res) {
 
 routes.route('/').post(function (req, res) {
     var form = new formidable.IncomingForm();
-    // form.uploadDir = './data';
 
     form.on('fileBegin', function(name, file) {
         file.path += '.zip';
@@ -47,10 +46,6 @@ routes.route('/').post(function (req, res) {
             }
         )
         .then(async () => {
-            // mongoose.connect('mongodb://localhost:27017/tempo', function(err) {
-            //     if (err) { throw err; }
-            // });
-
             const match = name.match(/(\w+)\..*/);
             name = match[1];
 
@@ -63,7 +58,6 @@ routes.route('/').post(function (req, res) {
 
             await currentFile.save(function (err) {
                 if (err) { throw err; }
-                // mongoose.connection.close();
             });
 
             res.status(204);
