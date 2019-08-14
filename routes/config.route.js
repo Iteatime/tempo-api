@@ -33,12 +33,10 @@ routes.route('/').post(async function (req, res) {
 
     await currentConfig.save(function (err) {
         if (err) { throw err; }
-        console.log('Registered config succesfully');
     });
 
     res.status(204);
     res.send();
-    console.log('Config saved successfully');
 });
 
 routes.route('/').delete(async function (req, res) {
@@ -49,7 +47,6 @@ routes.route('/').delete(async function (req, res) {
 
     res.status(204);
     res.send();
-    console.log('Config deleted successfully');
 });
 
 module.exports = routes;
