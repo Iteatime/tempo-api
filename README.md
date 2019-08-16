@@ -15,13 +15,24 @@ Invoke a command line tool at the installation directory and install the applica
 
 `npm install`
 
+## Configuration
+
+You have to set environment variables using .env* files, then you have to create a `.env.prod` file for a production use and a `.env.dev` for a development use.
+You have to set the "PORT" variable and the "MONGO_URL" variable in these .env* files, example:
+`PORT=4000`
+`MONGO_URL=mongodb://localhost:27017/tempo`
+
 ## Running
 
 Make sure that the MongoDB service is running (refer back to the [installation instructions](https://docs.mongodb.com/manual/administration/install-community/) if it's not).
 
-Run the application using:
+For production, run the application using:
 
-`nodemon server`
+`npm run prod`
+
+For development, run the application using:
+
+`npm run dev`
 
 At this point, the console should read:
 
@@ -30,7 +41,7 @@ At this point, the console should read:
 [nodemon] to restart at any time, enter `rs`
 [nodemon] watching: *.*
 [nodemon] starting `node server.js`
-Listening on port 4000
+Listening on port xxxx
 Database is connected
 ```
 
