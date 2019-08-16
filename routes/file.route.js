@@ -36,7 +36,7 @@ routes.route('/').post(function (req, res) {
         name = files.file.name;
         gtfs.import(
             {
-                "mongoUrl": "mongodb://localhost:27017/tempo",
+                "mongoUrl": process.env.MONGO_URL,
                 "agencies": [
                     {
                         "agency_key": "STAC",
