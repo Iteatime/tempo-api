@@ -89,3 +89,5 @@ typings/
 
 # Mac OS
 .DS_Store
+.env.dev
+.env.prod

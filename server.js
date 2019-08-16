@@ -8,6 +8,9 @@ const express = require('express'),
     config = require('./gtfs-config.json'),
     gtfs = require('gtfs');
 
+const dotenv = require('dotenv');
+    dotenv.config();
+
     const testRoute = require('./routes/test.route');
     const queryRoute = require('./routes/query.route');
     const fileRoute = require('./routes/file.route');
@@ -15,7 +18,7 @@ const express = require('express'),
     const mainRoute = require('./routes/main.route');
 
     mongoose.Promise = global.Promise;
-    mongoose.connect(config.mongoUrl, { useNewUrlParser: true }).then(
+    mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true }).then(
       () => {
         console.log('Database is connected')
       },
@@ -31,7 +34,7 @@ const express = require('express'),
     app.use('/config', configRoute);
     app.use('/', mainRoute);
 
-    const port = process.env.PORT || 4000;
+    const port = process.env.PORT;
 
     const server = app.listen(port, function(){
       console.log('Listening on port ' + port);
