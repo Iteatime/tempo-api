@@ -1,5 +1,6 @@
 {
     "mongoUrl": "mongodb://localhost:27017/tempo",
+    "mongoUrlDev": "mongodb://localhost:27017/tempo",
     "agencies": [
       {
         "agency_key": "STAC",
