@@ -20,11 +20,11 @@ routes.route('/').post(function (req, res) {
 
 routes.route('/timetables').post(async function (req, res) {
     const payload = req.body;
-    
+
     const agency_key = 'STAC';
     let routes = await gtfs.getRoutes();
     const data = {};
-    
+
     if (payload.hasOwnProperty('routes')) {
         const filteredRoutes = [];
         for (let route of routes) {
@@ -34,7 +34,7 @@ routes.route('/timetables').post(async function (req, res) {
         }
         routes = filteredRoutes;
     }
-    
+
     for (let route of routes) {
         let route_id = route.route_id;
         data[route_id] = [];
@@ -51,7 +51,7 @@ routes.route('/timetables').post(async function (req, res) {
             let headsignsByTrip = {};
             let indexedTrips = {};
             for (let trip of trips) {
-                let match = trip.trip_id.match(/^(\d+)-(\w+)-(\w+)-(\w+)-\d\d-?(\w*)$/);
+                let match = trip.trip_id.match(/^(\d+)-(\w+)-(\w+)-([^\d]+)-\d\d-?(\w*)$/);
                 let id = match[1];
                 let prod = match[3];
                 if (!indexedTrips.hasOwnProperty(prod)) {
